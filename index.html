@@ -21,25 +21,9 @@
         canvas {
             display: block;
         }
-        #controls {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-        button {
-            margin: 5px;
-        }
     </style>
 </head>
 <body>
-    <div id="controls">
-        <button id="zoom-in">Zoom In</button>
-        <button id="zoom-out">Zoom Out</button>
-    </div>
     <div id="pdf-viewer"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
@@ -47,12 +31,10 @@
         const url = 'FamiljaSelmani.pdf'; // Ensure this path is correct and accessible
 
         const pdfViewer = document.getElementById('pdf-viewer');
-        const zoomInButton = document.getElementById('zoom-in');
-        const zoomOutButton = document.getElementById('zoom-out');
+        const scale = 1.5;  // Fixed scale
 
         let pdfDoc = null;
         let pageNum = 1;
-        let scale = 1.5;  // Initial scale
         let canvas = null;
         let context = null;
 
@@ -99,16 +81,6 @@
                 console.error('Error loading PDF:', error);
             });
         }
-
-        zoomInButton.addEventListener('click', () => {
-            scale += 0.1;
-            renderPage(pageNum, scale);
-        });
-
-        zoomOutButton.addEventListener('click', () => {
-            scale = Math.max(0.1, scale - 0.1);
-            renderPage(pageNum, scale);
-        });
 
         loadPDF();
     </script>
