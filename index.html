@@ -22,9 +22,25 @@
             width: 100%;
             height: auto;
         }
+        #controls {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        button {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
+    <div id="controls">
+        <button id="zoom-in">Zoom In</button>
+        <button id="zoom-out">Zoom Out</button>
+    </div>
     <div id="pdf-viewer"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
@@ -32,49 +48,66 @@
         const url = 'FamiljaSelmani.pdf'; // Ensure this path is correct and accessible
 
         const pdfViewer = document.getElementById('pdf-viewer');
+        const zoomInButton = document.getElementById('zoom-in');
+        const zoomOutButton = document.getElementById('zoom-out');
 
-        // Check if PDF.js library loaded
-        if (typeof pdfjsLib === 'undefined') {
-            console.error('PDF.js library is not loaded.');
-        } else {
-            console.log('PDF.js library loaded:', pdfjsLib);
+        let pdfDoc = null;
+        let pageNum = 1;
+        let scale = 1.5;
+        let canvas = null;
+        let context = null;
+
+        function renderPage(num, scale) {
+            pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale });
+                if (canvas) {
+                    pdfViewer.removeChild(canvas);
+                }
+                canvas = document.createElement('canvas');
+                context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                pdfViewer.appendChild(canvas);
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext).promise.then(() => {
+                    console.log('Page rendered');
+                }).catch(error => {
+                    console.error('Error rendering page:', error);
+                });
+            }).catch(error => {
+                console.error('Error fetching page:', error);
+            });
+        }
+
+        function loadPDF() {
+            if (typeof pdfjsLib === 'undefined') {
+                console.error('PDF.js library is not loaded.');
+                return;
+            }
 
             pdfjsLib.getDocument(url).promise.then(pdf => {
-                console.log('PDF loaded');
-                
-                // Fetch the first page
-                pdf.getPage(1).then(page => {
-                    console.log('Page loaded');
-                    
-                    const scale = 1.5;
-                    const viewport = page.getViewport({ scale });
-
-                    // Prepare canvas using PDF page dimensions
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    // Append canvas to the viewer
-                    pdfViewer.appendChild(canvas);
-
-                    // Render PDF page into canvas context
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    page.render(renderContext).promise.then(() => {
-                        console.log('Page rendered');
-                    }).catch(error => {
-                        console.error('Error rendering page:', error);
-                    });
-                }).catch(error => {
-                    console.error('Error fetching page:', error);
-                });
+                pdfDoc = pdf;
+                renderPage(pageNum, scale);
             }).catch(error => {
                 console.error('Error loading PDF:', error);
             });
         }
+
+        zoomInButton.addEventListener('click', () => {
+            scale += 0.1;
+            renderPage(pageNum, scale);
+        });
+
+        zoomOutButton.addEventListener('click', () => {
+            scale = Math.max(0.1, scale - 0.1);
+            renderPage(pageNum, scale);
+        });
+
+        loadPDF();
     </script>
 </body>
 </html>
