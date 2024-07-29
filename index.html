@@ -1123,9 +1123,46 @@ try{
 pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
 }catch(e){}
 </script>
-<title></title>
+ <style>
+        /* Ensure the container is positioned at the top left */
+        .button-container {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            left: 10px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between buttons */
+        }
+
+        /* Styling for the buttons */
+        .styled-button {
+            background-color: #007bff; /* Blue background color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hover effect */
+        .styled-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+    </style>
 </head>
 <body style="max-width: 100%; overflow-x: hidden;">
+<div class="button-container">
+        <button class="styled-button">Button 1</button>
+        <button class="styled-button">Button 2</button>
+    </div>
 <div id="sidebar">
 <div id="outline">
 </div>
