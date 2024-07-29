@@ -6,7 +6,7 @@
     <title>PDF Viewer</title>
     <style>
         body {
-            margin: 50px;
+            margin: 0;
             padding: 0;
             overflow: hidden;
         }
@@ -17,9 +17,11 @@
             align-items: center;
             justify-content: center;
             overflow: auto;
+            box-sizing: border-box;
         }
         canvas {
             display: block;
+            border: 1px solid #ddd; /* Optional: Adds a border for better visualization */
         }
     </style>
 </head>
@@ -31,7 +33,7 @@
         const url = 'FamiljaSelmani.pdf'; // Ensure this path is correct and accessible
 
         const pdfViewer = document.getElementById('pdf-viewer');
-        const scale = 1.5;  // Fixed scale
+        const scale = 1;  // Set scale to 1 for default size
 
         let pdfDoc = null;
         let pageNum = 1;
