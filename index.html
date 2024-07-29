@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Familja Selmani</title>
+    <title>PDF Viewer</title>
     <style>
         body {
             margin: 0;
@@ -19,8 +19,7 @@
             overflow: auto;
         }
         canvas {
-            width: 100%;
-            height: auto;
+            display: block;
         }
         #controls {
             position: fixed;
@@ -58,8 +57,11 @@
         let context = null;
 
         function renderPage(num, scale) {
+            if (!pdfDoc) return;
+
             pdfDoc.getPage(num).then(page => {
                 const viewport = page.getViewport({ scale });
+                
                 if (canvas) {
                     pdfViewer.removeChild(canvas);
                 }
