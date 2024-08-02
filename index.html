@@ -1086,6 +1086,40 @@
 .x8c{left:7182.929350pt;}
 }
 </style>
+<style>
+        /* Ensure the container is positioned at the top left */
+        .button-container {
+            position: absolute;
+            top: 50px; /* Adjust as needed */
+            left: 50px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between buttons */
+        }
+
+        /* Styling for the buttons */
+        .styled-button {
+            background-color: #0056b3; /* Darker blue background color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hover effect */
+        .styled-button:hover {
+            background-color: #003d7a; /* Even darker blue on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+    </style>
 <script>
 /*
  Copyright 2012 Mozilla Foundation 
