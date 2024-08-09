@@ -1508,6 +1508,16 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
                 /* Enhanced shadow on hover */
             }
+
+    .info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* Space between each line */
+        }
+        .info b {
+            display: inline-block;
+            width: 200px; /* Adjust width as needed */
+        }
         </style>
         <title>Familja Selmani</title>
     </head>
@@ -1530,10 +1540,11 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
             <b>Telefon:</b> +4550124809 <br>
             <b>e-mail:</b> florimslm@hotmail.com</p>
             <h1>Statistika të familjes</h1>
-            <p><b>Numri gjith familjes deri tash:</b> 358. <br>
-                <b>Numri që jetojnë sot:</b> 299. <br>
-                <b>Numri shtëpijavë:</b> 66.
-            </p>
+            <div class="info">
+        <b>Numri gjith familjes deri tash:</b> <span>358</span>
+        <b>Numri që jetojnë sot:</b> <span>299</span>
+        <b>Numri shtëpijavë:</b> <span>66</span>
+    </div>
         </div>
 </div>
 <div class="loading-indicator">
