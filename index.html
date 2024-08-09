@@ -1520,20 +1520,21 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
             
             .info div {
                 display: flex;
-                justify-content: flex-start;
+                justify-content: space-between; /* Space between text and numbers */
+                align-items: flex-start; /* Align items to the start (top) */
             }
 
             .info b {
-                flex-basis: auto; /* Width based on content */
-                margin-right: 20px; /* Space between text and numbers */
+                flex-shrink: 0; /* Prevents shrinking of the b element */
             }
         
             
             .info span {
-                padding-left: 20px; /* Adjust padding for indentation */
+                min-width: 50px; /* Set a minimum width for alignment (adjust as needed) */
+                text-align: left; /* Ensure numbers are left-aligned */
+                margin-left: 50px;
             }
         </style>
-        <title>Familja Selmani</title>
     </head>
     <body style="max-width: 100%; overflow-x: hidden;">
 </head>
@@ -1553,7 +1554,7 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
                 na kontaktoni në telefon (Viber/WhatsApp) ose në e-mail: <br><br>
             <b>Telefon:</b> +4550124809 <br>
             <b>e-mail:</b> florimslm@hotmail.com</p>
-            <h1>Statistika të familjes</h1>
+            <h1>Statistika</h1>
             <div class="info">
     <div>
         <b>Numri gjith familjes deri tash:</b> <span>358</span>
